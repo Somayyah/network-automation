@@ -1,7 +1,7 @@
 import pynetbox
 import requests
 
-class connector:
+class Connector:
     def __init__(self, NETBOX_URL, NETBOX_TOKEN, threading=True, strict_filters=True):
         self.nb = self.connect(NETBOX_URL, NETBOX_TOKEN, threading, strict_filters)
 

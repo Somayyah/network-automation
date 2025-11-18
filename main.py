@@ -2,7 +2,7 @@
 
 from dotenv import load_dotenv
 import os
-from utils.connector import connector
+from utils.connector import Connector
 import requests
 
 def main():
@@ -11,7 +11,7 @@ def main():
     NETBOX_URL = os.getenv("NETBOX_URL")
     NETBOX_TOKEN = os.getenv("NETBOX_TOKEN")
 
-    conn = connector(NETBOX_URL,NETBOX_TOKEN)
+    conn = Connector(NETBOX_URL,NETBOX_TOKEN)
 
     try:
         devices = conn.nb.dcim.devices.all()
@@ -22,7 +22,6 @@ def main():
         print(f"[ERROR] Connection timed out: {e}")
     except Exception as e:
         print(f"[ERROR] Something went wrong: {e}")
-        return False, None
 
 if __name__ == "__main__":
     main()
