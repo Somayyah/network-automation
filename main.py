@@ -2,7 +2,7 @@
 
 from dotenv import load_dotenv
 import os
-import pynetbox
+from utils.connector import connector
 import json
 
 load_dotenv()
@@ -11,19 +11,11 @@ NETBOX_URL = os.getenv("NETBOX_URL")
 NETBOX_TOKEN = os.getenv("NETBOX_TOKEN")
 
 def main():
-    pass
+    conn = connector(NETBOX_URL,NETBOX_TOKEN)
+    devices = conn.nb.dcim.devices.all()
+
+    for d in devices:
+        print(d)
 
 if __name__ == "__main__":
-    nb = pynetbox.api(
-        NETBOX_URL,
-        token=NETBOX_TOKEN,
-        threading=True,
-        strict_filters=True,
-    )
-    
-    devices = nb.dcim.devices.filter(device_role="cisco-switch")
-    
-    for d in devices:
-        device_dict = dict(d)
-        print(json.dumps(device_dict, indent=2))
-    pass
+    main()
