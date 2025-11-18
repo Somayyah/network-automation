@@ -18,7 +18,7 @@ if __name__ == "__main__":
         NETBOX_URL,
         token=NETBOX_TOKEN,
         threading=True,
-        #strict_filters=True,
+        strict_filters=True,
     )
     
     devices = nb.dcim.devices.filter(device_role="cisco-switch")
