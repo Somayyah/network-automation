@@ -11,16 +11,18 @@ def main():
     NETBOX_URL = os.getenv("NETBOX_URL")
     NETBOX_TOKEN = os.getenv("NETBOX_TOKEN")
 
+    conn = connector(NETBOX_URL,NETBOX_TOKEN)
+
     try:
-        conn = connector(NETBOX_URL,NETBOX_TOKEN)
         devices = conn.nb.dcim.devices.all()
 
         for d in devices:
             print(d)
-    except requests.exceptions.ConnectionError as e:
-        print(f"[ERROR] Could not connect to NetBox: {e}")
+    except requests.exceptions.ConnectTimeout as e:
+        print(f"[ERROR] Connection timed out: {e}")
     except Exception as e:
         print(f"[ERROR] Something went wrong: {e}")
+        return False, None
 
 if __name__ == "__main__":
     main()
