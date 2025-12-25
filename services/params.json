@@ -2,5 +2,8 @@
     "tacacs-servers": {
         "IPs": ["10.0.0.1", "10.0.0.2"],
         "secret": "cisco"
+    },
+    "lines":{
+        
     }
 }

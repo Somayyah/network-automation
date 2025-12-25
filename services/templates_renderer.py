@@ -5,8 +5,8 @@ env = Environment(loader=FileSystemLoader("services/templates/"))
 
 params = {}
 
-with open("params.json", "r") as p:
-    params = p.load()
+with open("services/params.json", "r") as p:
+    params = load(p)
 
 template = env.get_template("tacacs.j2")
 
@@ -16,4 +16,5 @@ TACACS_IP = []
 for srv in servers["IPs"]:
     TACACS_IP.append(srv)
 
-template.render(TACACS_IP=TACACS_IP, SECRET=SECRET)
+with open("services/rendered/tacacs.txt", "w") as w:
+    w.write(template.render(TACACS_IP=TACACS_IP, SECRET=SECRET))

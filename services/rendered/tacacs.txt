@@ -3,18 +3,18 @@
 !
 aaa new-model
 !
-{%- for IP in TACACS_IP %}
-tacacs server {{ IP }}-SRV
-address ipv4 {{ IP }}
-key {{ SECRET }}
-{%- endfor %}
+tacacs server 10.0.0.1-SRV
+address ipv4 10.0.0.1
+key cisco
+tacacs server 10.0.0.2-SRV
+address ipv4 10.0.0.2
+key cisco
 !
 exit
 !
 aaa group server tacacs+ TACACS_GROUP
-{%- for IP in TACACS_IP %}
-server name {{ IP }}-SRV
-{%- endfor %}
+server name 10.0.0.1-SRV
+server name 10.0.0.2-SRV
 !
 exit
 !
@@ -26,4 +26,3 @@ aaa authorization commands 15 SSH group TACACS_GROUP if-authenticated
 aaa accounting exec SSH start-stop group TACACS_GROUP
 aaa accounting commands 0 SSH start-stop group TACACS_GROUP
 aaa accounting commands 15 SSH start-stop group TACACS_GROUP
-!
