@@ -3,16 +3,16 @@
 !
 aaa new-model
 !
-{%- for IP in TACACS_IP %}
-tacacs server {{ IP }}-SRV
-    address ipv4 {{ IP }}
-    key {{ SECRET }}
-{%- endfor %}
+tacacs server 10.0.0.1-SRV
+    address ipv4 10.0.0.1
+    key cisco
+tacacs server 10.0.0.2-SRV
+    address ipv4 10.0.0.2
+    key cisco
 !
 aaa group server tacacs+ TACACS_GROUP
-{%- for IP in TACACS_IP %}
-    server name {{ IP }}-SRV
-{%- endfor %}
+    server name 10.0.0.1-SRV
+    server name 10.0.0.2-SRV
 !
 aaa authentication login SSH group TACACS_GROUP local
 aaa authentication enable SSH group tacacs+ enable
@@ -23,11 +23,14 @@ aaa accounting exec SSH start-stop group TACACS_GROUP
 aaa accounting commands 0 SSH start-stop group TACACS_GROUP
 aaa accounting commands 15 SSH start-stop group TACACS_GROUP
 !
-{%- for line in ["0 4", "5 15"] %}
-line vty {{ line }}
-{%- for item in ["authentication", "authorization", "accounting"] %}
-    login {{ item}} TACACS_GROUP
-{%- endfor %}
+line vty 0 4
+    login authentication TACACS_GROUP
+    login authorization TACACS_GROUP
+    login accounting TACACS_GROUP
     transport input telnet ssh
-{%- endfor %}
+line vty 5 15
+    login authentication TACACS_GROUP
+    login authorization TACACS_GROUP
+    login accounting TACACS_GROUP
+    transport input telnet ssh
 !
