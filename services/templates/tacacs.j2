@@ -3,12 +3,16 @@
 !
 aaa new-model
 !
-tacacs server TACACS-SRV
-address ipv4 {{ TACACS_IP }}
+{% for IP in TACACS_IP %}
+tacacs server {{ IP }} -SRV
+address ipv4 {{ IP }}
 key {{ SECRET }}
+{% endfor %}
 !
 aaa group server tacacs+ TACACS_GROUP
-server name TACACS-SRV
+{% for IP in TACACS_IP %}
+server name {{ IP }} -SRV
+{% endfor %}
 !
 aaa authentication login SSH group TACACS_GROUP local
 aaa authentication enable SSH group tacacs+ enable
