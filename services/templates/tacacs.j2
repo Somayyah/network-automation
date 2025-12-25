@@ -1,3 +1,20 @@
 
 !! A simple implementation to enable tacacs+ on cisco switches
-
+!
+aaa new-model
+!
+tacacs server TACACS-SRV
+address ipv4 {{ TACACS_IP }}
+key {{ SECRET }}
+!
+aaa group server tacacs+ TACACS_GROUP
+server name TACACS-SRV
+!
+aaa authentication login default group tacacs+ local
+aaa authentication enable default group tacacs+ enable
+aaa authorization config-commands
+aaa authorization commands 0 default group tacacs+ if-authenticated
+aaa authorization commands 15 default group tacacs+ if-authenticated
+aaa accounting exec default start-stop group tacacs+
+aaa accounting commands 0 default start-stop group tacacs+
+aaa accounting commands 15 default start-stop group tacacs+
