@@ -14,7 +14,7 @@ def main():
     conn = Connector(NETBOX_URL,NETBOX_TOKEN)
 
     try:
-        devices = conn.nb.dcim.devices.filter(primary_ip="10.48.186.32/24")
+        devices = conn.nb.dcim.devices.filter(primary_ip="")
         for d in devices:
             print(d)
     except requests.exceptions.ConnectTimeout as e:
