@@ -1,10 +1,6 @@
 from jinja2 import Environment, FileSystemLoader
 
-<<<<<<< HEAD
-env = Environment(loader=FileSystemLoader("templates/"))
-=======
 env = Environment(loader=FileSystemLoader("services/templates/"))
->>>>>>> staging
 
 template = env.get_template("tacacs.j2")
 
