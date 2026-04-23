@@ -1,0 +1,7 @@
+- name: Simple test playbook
+  hosts: servers
+  gather_facts: yes
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "Hello, World!"
