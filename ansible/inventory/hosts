@@ -1,2 +1,2 @@
 [servers]
-myserver ansible_host={{ }} ansible_user={{ }}
+myserver ansible_host={{ }} ansible_user=ansible

@@ -1,0 +1,5 @@
+- name: Stow dotfiles
+  become: false
+  command: stow -t {{ target_home }} .
+  args:
+    chdir: "{{ target_home }}/dotfiles"

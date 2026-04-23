@@ -3,9 +3,11 @@
   become: true
 
   vars_files:
+    - ../vars/globals.yaml
     - ../vars/packages.yaml
     - ../vars/repos.yaml
 
   roles:
     - packages
     - repos
+    - dotfiles

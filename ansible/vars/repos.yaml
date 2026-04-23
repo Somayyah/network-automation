@@ -1,26 +1,26 @@
 common_repos:
   - name: dotfiles
-    repo: git@github.com:somayyah/dotfiles.git
-    dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+    repo: "{{ target_repo }}/dotfiles.git"
+    dest: "{{ target_home }}/dotfiles"
     version: main
     type: ssh
   - name: FastCat
     repo: https://github.com/m3tozz/FastCat.git
-    dest: "{{ lookup('env', 'HOME') }}/FastCat"
+    dest: "{{ target_home }}/FastCat"
     version: main
   - name: flower
-    repo: git@github.com:somayyah/flower.git
-    dest: "{{ lookup('env', 'HOME') }}/flower"
+    repo: "{{ target_repo }}/flower.git"
+    dest: "{{ target_home }}/flower"
     version: main
     type: ssh
-  - name: dotfiles
-    repo: git@github.com:somayyah/manimations.git
-    dest: "{{ lookup('env', 'HOME') }}/manimations"
+  - name: manimations
+    repo: "{{ target_repo }}/manimations.git"
+    dest: "{{ target_home }}/manimations"
     version: main
     type: ssh
-  - name: dotfiles
-    repo: git@github.com:somayyah/cheetsheets.git
-    dest: "{{ lookup('env', 'HOME') }}/cheetsheets"
+  - name: cheetsheets
+    repo: "{{ target_repo }}/cheetsheets.git"
+    dest: "{{ target_home }}/cheetsheets"
     version: main
     type: ssh
     
