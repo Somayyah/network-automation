@@ -2,7 +2,7 @@
 
 from dotenv import load_dotenv
 import os
-from utils.connector import Connector
+from archive.utils.connector import Connector
 import requests
 
 def main():
