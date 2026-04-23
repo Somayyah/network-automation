@@ -4,3 +4,18 @@ common_packages:
   - openssh-clients
   - ffmpeg
   - emacs
+  - wireshark
+  - nvim
+  - kitty
+  - akmod-VirtualBox
+  - VirtualBox
+  - kernel-devel
+  - kernel-headers
+  - dkms
+  - @development-tools
+  - fira-code-fonts
+  - sxhkd
+  - dconf-editor
+  - unzip
+  - bzip2
+  - tar
