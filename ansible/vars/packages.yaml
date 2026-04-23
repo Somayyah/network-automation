@@ -1,0 +1,5 @@
+common_packages:
+  - stow
+  - fastfetch
+  - openssh-clients
+  - ffmpeg

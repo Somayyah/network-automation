@@ -1,0 +1,7 @@
+- name: Ensure repositories are cloned
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version | default('main') }}"
+    update: yes
+  loop: "{{ common_repos }}"

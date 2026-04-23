@@ -1,7 +1,11 @@
-- name: Simple test playbook
-  hosts: servers
-  gather_facts: yes
-  tasks:
-    - name: Print a message
-      debug:
-        msg: "Hello, World!"
+- name: Bootstrap my machine
+  hosts: myserver
+  become: true
+
+  vars_files:
+    - ../vars/packages.yaml
+    - ../vars/repos.yaml
+
+  roles:
+    - packages
+    - repos
