@@ -2,8 +2,15 @@
 
 set -euo pipefail
 
-HOST=$1
-USER=$2
+HOST=${1:-}
+USER=${2:-}
+
+if [[ -z "$HOST" ]]; then
+    read -rp "Target host: " HOST
+fi
+if [[ -z "$USER" ]]; then
+    read -rp "Remote user: " USER
+fi
 
 log() {
     echo "[+] $1"

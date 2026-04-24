@@ -18,10 +18,25 @@ Shifting direction for this repo:
 
 This is now more of a personal system setup repo than a network automation playground. Old tools may be revisited later.
 
-**..TODO**
+## Bootstrap workflow (Linux hosts for now)
 
-Automate ansible user creation using bootstrap.sh:
+This bootstrap script is intended for Linux-based systems and prepares them for Ansible management, it is not applicable to network devices or non-Linux systems. To start the script:
+
 
 ```bash
-curl -s https://raw.githubusercontent.com/somayyah/network-automation/main/bootstrap.sh | bash
+git clone https://github.com/somayyah/network-automation.git
+cd network-automation
+bash bootstrap.sh <TARGET IP OR HOSTNAME> <TARGET MACHINE USER>
+```
+
+This will:
+
++ create the ansible user on the target machine
++ configure sudo privileges
++ install SSH public key authentication for passwordless access
+
+Once completed, the machine is ready for configuration via Ansible:
+
+```bash
+make setup
 ```
