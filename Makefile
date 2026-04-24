@@ -1,2 +1,2 @@
 setup:
-	ansible-playbook ansible/playbooks/setup.yaml
+	ansible-playbook ansible/playbooks/setup.yaml -vvv

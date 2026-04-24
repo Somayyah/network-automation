@@ -1,11 +1,12 @@
 common_packages:
+  - git
   - stow
   - fastfetch
   - openssh-clients
   - ffmpeg
   - emacs
   - wireshark
-  - nvim
+  - neovim
   - kitty
   - akmod-VirtualBox
   - VirtualBox
