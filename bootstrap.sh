@@ -19,7 +19,7 @@ log "Preparing SSH key for ansible..."
 timestamp=$(date +"%Y-%m-%d_%H_%M_%S")
 KEY="$HOME/.ssh/ed25519_ansible_$timestamp"
 
-ssh-keygen -C "ansible" -t ed25519 -f "$KEY" >/dev/null
+ssh-keygen -C "ansible" -t ed25519 -f "$KEY" -N "" >/dev/null
 PUBKEY=$(cat "${KEY}.pub")
 
 log "Key generated: $KEY.pub"
