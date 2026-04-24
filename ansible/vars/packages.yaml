@@ -12,7 +12,6 @@ common_packages:
   - kernel-devel
   - kernel-headers
   - dkms
-  - @development-tools
   - fira-code-fonts
   - sxhkd
   - dconf-editor

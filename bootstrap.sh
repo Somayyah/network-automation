@@ -3,28 +3,29 @@
 HOST=$1
 USER=$2
 
+read -s -p "Enter sudo password for $USER@$HOST: " SUDOPASS
+echo ""
+
 echo "Connecting to $HOST as $USER..."
 
+ssh -t "$USER@$HOST" "sudo -S bash" <<EOF
+$SUDOPASS
+set -euo pipefail
+trap 'echo "Error occurred. Aborting."' ERR
+set -x
+
 echo "Creating user..."
-ssh "$USER@$HOST" <<EOF
-useradd -m -s /bin/bash ansible
+id ansible >/dev/null 2>&1 || useradd -m -s /bin/bash ansible
 usermod -aG wheel ansible
-EOF
 
 echo "Configuring SSH..."
-ssh "$USER@$HOST" <<EOF
 mkdir -p /home/ansible/.ssh
 chown -R ansible:ansible /home/ansible/.ssh
 chmod 700 /home/ansible/.ssh
 
-# TBD...
-
-EOF
-
 echo "Setting sudo rules..."
-ssh "$USER@$HOST" <<EOF
-echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
+[ -f /etc/sudoers.d/ansible ] || echo 'ansible ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/ansible
 chmod 440 /etc/sudoers.d/ansible
-EOF
 
 echo "Done."
+EOF
