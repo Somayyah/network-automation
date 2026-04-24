@@ -1,13 +1,10 @@
-- name: Bootstrap my machine
+- name: Prepare my machine
   hosts: myserver
   become: true
-
+  gather_facts: no
   vars_files:
     - ../vars/globals.yaml
     - ../vars/packages.yaml
-    - ../vars/repos.yaml
 
   roles:
     - packages
-    - repos
-    - dotfiles
