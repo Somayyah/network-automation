@@ -1,0 +1,37 @@
+- name: Ensure .ssh directory exists
+  become: yes
+  file:
+    path: "{{ target_home }}/.ssh"
+    state: directory
+    mode: "0700"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+
+- name: Generate GitHub SSH key if missing
+  become: true
+  become_user: "{{ target_user }}"
+  openssh_keypair:
+    path: "{{ target_home }}/.ssh/id_ed25519_github"
+    type: ed25519
+    comment: "{{ email }}"
+    force: false
+
+- name: Configure SSH for GitHub
+  become: yes
+  copy:
+    dest: "{{ target_home }}/.ssh/config"
+    content: |
+      Host github.com
+        IdentityFile ~/.ssh/id_ed25519_github
+        IdentitiesOnly yes
+    mode: "0600"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+
+- name: Add GitHub to known_hosts
+  become: yes
+  known_hosts:
+    name: github.com
+    key: "{{ lookup('pipe', 'ssh-keyscan github.com') }}"
+    path: "{{ target_home }}/.ssh/known_hosts"
+    state: present

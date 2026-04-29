@@ -1,26 +1,36 @@
 common_repos:
   - name: dotfiles
-    repo: "{{ target_repo }}/dotfiles.git"
+    repo: "{{ target_repo_https }}/dotfiles.git"
     dest: "{{ target_home }}/dotfiles"
     version: main
-    type: ssh
+    use_ssh: true
+
   - name: FastCat
     repo: https://github.com/m3tozz/FastCat.git
     dest: "{{ target_home }}/FastCat"
     version: main
+    use_ssh: false
+
   - name: flower
-    repo: "{{ target_repo }}/flower.git"
+    repo: "{{ target_repo_https }}/flower.git"
     dest: "{{ target_home }}/flower"
     version: main
-    type: ssh
+    use_ssh: true
+
   - name: manimations
-    repo: "{{ target_repo }}/manimations.git"
+    repo: "{{ target_repo_https }}/manimations.git"
     dest: "{{ target_home }}/manimations"
     version: main
-    type: ssh
+    use_ssh: true
+
   - name: cheetsheets
-    repo: "{{ target_repo }}/cheetsheets.git"
+    repo: "{{ target_repo_https }}/cheetsheets.git"
     dest: "{{ target_home }}/cheetsheets"
     version: main
-    type: ssh
-    
+    use_ssh: true
+
+  - name: network-automation
+    repo: "{{ target_repo_https }}/network-automation.git"
+    dest: "{{ target_home }}/network-automation"
+    version: main
+    use_ssh: true

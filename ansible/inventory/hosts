@@ -1,2 +1,0 @@
-[servers]
-myserver ansible_host= ansible_user=ansible

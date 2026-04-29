@@ -1,0 +1,7 @@
+all:
+  children:
+    servers:
+      hosts:
+        myserver:
+          ansible_host: {{ target_host }}
+          ansible_user: ansible

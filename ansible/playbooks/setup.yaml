@@ -1,11 +1,24 @@
+- name: Validate required env vars are set
+  hosts: myserver
+  vars_files:
+    - ../vars/globals.yaml
+  tasks:
+    assert:
+      that:
+        - target_user | length > 0
+        - git_user_name | length > 0
+      fail_msg: "Run bootstrap.sh to set required environment variables"
+
 - name: Prepare my machine
   hosts: myserver
   gather_facts: no
   vars_files:
     - ../vars/globals.yaml
     - ../vars/repos.yaml
+    - ../vars/packages.yaml
 
   roles:
     - packages
+    - github_ssh
+    - git_config
     - repos
-    - dotfiles

@@ -1,3 +1,8 @@
-target_user: watari
-target_home: "/home/watari"
-target_repo: "git@github.com:somayyah"
+target_host: "{{ lookup('env', 'TARGET_HOST') }}"
+target_user: "{{ lookup('env', 'TARGET_USER') }}"
+target_home: "{{ lookup('env', 'TARGET_HOME') }}"
+target_repo_https: "{{ lookup('env', 'TARGET_REPO_HTTPS') }}"
+target_repo_ssh: "{{ lookup('env', 'TARGET_REPO_SSH') }}"
+email: "{{ lookup('env', 'EMAIL') }}"
+git_user_name: "{{ lookup('env', 'GIT_USER_NAME') }}"
+git_user_email: "{{ lookup('env', 'GIT_USER_EMAIL') }}"

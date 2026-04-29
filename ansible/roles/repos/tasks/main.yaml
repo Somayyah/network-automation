@@ -1,10 +1,48 @@
-- name: Clone user repositories
+- name: check if repos on destination exist
   become: true
-  become_user: watari
+  ansible.builtin.stat:
+    path: "{{ item.dest }}"
+  loop: "{{ common_repos }}"
+  loop_control:
+    label: "{{ item.dest | replace(target_home, '') | replace('/', '') }}"
+  register: repo_stat_results
+
+- name: Clone repositories via HTTPS
+  become: true
   ansible.builtin.git:
-    repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
-    version: "{{ item.version }}"
+    repo: "{{ item.item.repo }}"
+    dest: "{{ item.item.dest }}"
+    version: "{{ item.item.version }}"
     clone: true
     update: false
+  loop: "{{ repo_stat_results.results }}"
+  loop_control:
+    label: "{{ item.item.dest  | replace(target_home, '') | replace('/', '') }}"
+  when: not item.stat.exists
+
+- name: Check current remote URL
+  become: true
+  become_user: "{{ target_user }}"   
+  command: git remote get-url origin
+  args:
+    chdir: "{{ item.dest }}"
   loop: "{{ common_repos }}"
+  loop_control:
+    label: "{{ item.dest  | replace(target_home, '') | replace('/', '') }}"
+  when: item.use_ssh | default(false)
+  register: remote_url_results
+  changed_when: false
+
+- name: Switch selected repositories to SSH remote
+  become: true
+  become_user: "{{ target_user }}"
+  command: git remote set-url origin {{ item.item.repo | replace(target_repo_https, target_repo_ssh) }}
+  args:
+    chdir: "{{ item.item.dest }}"
+  loop: "{{ remote_url_results.results }}"
+  loop_control:
+    label: "{{ item.item.dest  | replace(target_home, '') | replace('/', '') }}"
+  when:
+    - item.skipped is not defined
+    - item.item.use_ssh | default(false)
+    - "'git@' not in item.stdout"
