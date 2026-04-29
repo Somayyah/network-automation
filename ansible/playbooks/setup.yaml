@@ -19,8 +19,5 @@
     - ../vars/repos.yaml
     - ../vars/packages.yaml
   roles:
-    - packages
-    - github_ssh
-    - git_config
-    - repos
+    - dotfiles
 

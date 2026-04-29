@@ -26,14 +26,14 @@ This bootstrap script is intended for Linux-based systems and prepares them for 
 ```bash
 git clone https://github.com/somayyah/network-automation.git
 cd network-automation
-bash bootstrap.sh <TARGET IP OR HOSTNAME> <TARGET MACHINE USER>
+bash bootstrap.sh [TARGET IP OR HOSTNAME] [TARGET MACHINE USER] [EMAIL] [GITHUB USERNAME]
 ```
 
 This will:
 
-+ create the ansible user on the target machine
-+ configure sudo privileges
++ create the ansible user on the target machine with sudo privilages
 + install SSH public key authentication for passwordless access
++ configure env variables necessary for ansible
 
 Once completed, the machine is ready for configuration via Ansible:
 

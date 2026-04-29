@@ -1,5 +1,10 @@
+- name: Unstow dotfiles
+  become: yes
+  command: stow -D -t {{ target_home }} .
+  args:
+    chdir: "{{ target_home }}/dotfiles"
 - name: Stow dotfiles
-  become: false
+  become: yes
   command: stow -t {{ target_home }} .
   args:
     chdir: "{{ target_home }}/dotfiles"
