@@ -20,13 +20,15 @@ if [[ -z "$GITHUB_USER" ]]; then
     read -rp "Github Username: " GITHUB_USER
 fi
 
-export TARGET_HOST
-export TARGET_USER
-export TARGET_HOME="/home/$TARGET_USER"
-export TARGET_REPO_HTTPS="https://github.com/$GITHUB_USER"
-export TARGET_REPO_SSH="git@github.com:$GITHUB_USER"
-export GIT_USER_NAME="$GITHUB_USER"
-export GIT_USER_EMAIL="$EMAIL"
+cat > ansible/.env <<EOF
+TARGET_HOST=$TARGET_HOST
+TARGET_USER=$TARGET_USER
+TARGET_HOME=/home/$TARGET_USER
+TARGET_REPO_HTTPS=https://github.com/$GITHUB_USER
+TARGET_REPO_SSH=git@github.com:$GITHUB_USER
+GIT_USER_NAME=$GITHUB_USER
+GIT_USER_EMAIL=$EMAIL
+EOF
 
 log() {
     echo "[+] $1"
