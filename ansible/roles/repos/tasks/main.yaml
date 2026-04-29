@@ -1,7 +1,10 @@
-- name: Ensure repositories are cloned
+- name: Clone user repositories
+  become: true
+  become_user: watari
   ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
-    version: "{{ item.version | default('main') }}"
-    update: yes
+    version: "{{ item.version }}"
+    clone: true
+    update: false
   loop: "{{ common_repos }}"
