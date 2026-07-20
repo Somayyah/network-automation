@@ -2,21 +2,30 @@ common_packages:
   - git
   - stow
   - fastfetch
-  - openssh-clients
   - ffmpeg
   - emacs
   - wireshark
   - neovim
   - kitty
-  - akmod-VirtualBox
-  - VirtualBox
-  - kernel-devel
-  - kernel-headers
   - dkms
-  - "@development-tools"
-  - fira-code-fonts
   - sxhkd
   - dconf-editor
   - unzip
   - bzip2
   - tar
+
+fedora_packages:
+  - openssh-clients
+  - akmod-VirtualBox
+  - VirtualBox
+  - kernel-devel
+  - kernel-headers
+  - "@development-tools"
+  - fira-code-fonts
+
+debian_packages:
+  - openssh-client
+  - virtualbox
+  - linux-headers-generic
+  - build-essential
+  - fonts-firacode

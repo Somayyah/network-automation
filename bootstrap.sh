@@ -60,7 +60,11 @@ set -euo pipefail
 
 echo "[remote] Creating ansible user"
 id ansible >/dev/null 2>&1 || useradd -m -s /bin/bash ansible
-usermod -aG wheel ansible
+if getent group sudo >/dev/null 2>&1; then
+    usermod -aG sudo ansible
+else
+    usermod -aG wheel ansible
+fi
 
 echo "[remote] Configuring SSH directory"
 install -d -m 700 -o ansible -g ansible /home/ansible/.ssh
